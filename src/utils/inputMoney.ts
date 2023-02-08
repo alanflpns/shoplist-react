@@ -30,7 +30,7 @@ export const moneyInputFormatToFloat = (inputText: string) => {
             parseFloat(
               valor
                 .split("")
-                .filter((char) => char != ".")
+                .filter((char) => char !== ".")
                 .join("")
                 .replace(",", ".")
             ).toFixed(2)
