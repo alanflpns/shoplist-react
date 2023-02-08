@@ -42,7 +42,6 @@ function App() {
     let deferredPrompt: any;
     const addBtn = document.getElementById("add-button");
     if (addBtn) {
-      (addBtn as any).style.display = "none";
 
       window.addEventListener("beforeinstallprompt", (e) => {
         console.log('service work on beforeinstallprompt')
