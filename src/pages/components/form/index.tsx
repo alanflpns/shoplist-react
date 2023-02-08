@@ -61,7 +61,6 @@ export function Form({ productList, setProductList }: Props) {
     setNameProduct("");
     setQuantity(1);
     inputRef.current?.focus();
-    window.scrollTo(0, document.body.scrollHeight);
     const storage = new LocalStorageAdapter();
     storage.set("@ShopList/products", [...productList, product]);
   }

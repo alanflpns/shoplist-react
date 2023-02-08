@@ -21,7 +21,13 @@ export function InputCount({
       <button type="button" onClick={lessQuantity} disabled={rest.disabled}>
         -
       </button>
-      <input {...rest} type="number" value={quantity} />
+      <input
+        {...rest}
+        type="number"
+        value={quantity}
+        pattern="[0-9]*"
+        inputMode="numeric"
+      />
       <button type="button" onClick={moreQuantity} disabled={rest.disabled}>
         +
       </button>

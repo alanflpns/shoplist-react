@@ -6,6 +6,7 @@ import { TrashIcon } from "../assets/trashIcon";
 import { Input, InputCount } from "../components";
 import { moneyInputFormat, moneyInputFormatToFloat } from "../utils/inputMoney";
 import LocalStorageAdapter from "../infra/LocalStorageAdapter";
+import logo from "../assets/logo.png";
 
 export interface Product {
   name: string;
@@ -35,6 +36,47 @@ function App() {
 
     if (products) {
       setProductList(products);
+    }
+  }, []);
+
+  useEffect(() => {
+    let deferredPrompt: any;
+    const containerButton = document.getElementById("container-button");
+    const addButton = document.getElementById("add-button");
+    const cancelButton = document.getElementById("cancel-button");
+
+    if (containerButton && addButton && cancelButton) {
+      containerButton.style.display = "none";
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        console.log("service work on beforeinstallprompt");
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI to notify the user they can add to home screen
+        containerButton.style.display = "flex";
+
+        addButton.addEventListener("click", (e) => {
+          // hide our user interface that shows our A2HS button
+          containerButton.style.display = "none";
+          // Show the prompt
+          deferredPrompt.prompt();
+          // Wait for the user to respond to the prompt
+          deferredPrompt.userChoice.then((choiceResult: any) => {
+            if (choiceResult.outcome === "accepted") {
+              console.log("User accepted the prompt");
+            } else {
+              console.log("User dismissed the prompt");
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
+
+      cancelButton.addEventListener("click", (e) => {
+        containerButton.style.display = "none";
+      });
     }
   }, []);
 
@@ -168,6 +210,8 @@ function App() {
                     width="70px"
                     value={product.price}
                     disabled={product.isChecked}
+                    pattern="[0-9]*"
+                    inputMode="numeric"
                   />
 
                   <div
@@ -195,6 +239,19 @@ function App() {
       <div className={styles.containerPrice}>
         <strong>Total: </strong>
         <span>R$ {moneyInputFormat(String(totalPrice.toFixed(2)))}</span>
+      </div>
+
+      <div id="container-button" className={styles.addButton}>
+        <div className={styles.infoButton}>
+          <img src={logo} alt="logo-shop-list" />
+          <span>Instalar ShopList - React</span>
+          <div>
+            <button id="add-button">Instalar</button>
+            <button id="cancel-button" className={styles.buttonVariant}>
+              Cancelar
+            </button>
+          </div>
+        </div>
       </div>
     </main>
   );
