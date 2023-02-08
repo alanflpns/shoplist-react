@@ -1,0 +1,41 @@
+form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #404040;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttonForm {
+    all: unset;
+    cursor: pointer;
+
+    background-color: #008030;
+    color: #ffffff;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+    padding: 5px 10px;
+
+    &:hover {
+      background-color: #006020;
+    }
+
+    &:disabled {
+      background-color: #a1a1aa;
+      cursor: not-allowed;
+    }
+  }
+}

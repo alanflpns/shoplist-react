@@ -1,0 +1,19 @@
+input {
+  background: transparent;
+  padding: 5px 10px;
+  border: 1px solid #404040;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+    border-color: #008030;
+  }
+
+  &::placeholder {
+    color: #a3a3a3;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

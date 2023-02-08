@@ -1,0 +1,41 @@
+.countContainer {
+  display: flex;
+
+  button {
+    all: unset;
+    cursor: pointer;
+
+    border: 2px solid #008030;
+    color: #008030;
+    width: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+    text-decoration: none !important;
+    font-style: normal !important;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  input {
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 0 5px;
+    max-width: 30px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
