@@ -8,6 +8,8 @@ import { moneyInputFormat, moneyInputFormatToFloat } from "../utils/inputMoney";
 import LocalStorageAdapter from "../infra/LocalStorageAdapter";
 import logo from "../assets/logo.png";
 
+import productsMock from "../products-mock.json";
+
 export interface Product {
   name: string;
   quantity: number;
@@ -36,6 +38,9 @@ function App() {
 
     if (products) {
       setProductList(products);
+    } else {
+      storage.set("@ShopList/products", productsMock);
+      setProductList(productsMock);
     }
   }, []);
 
